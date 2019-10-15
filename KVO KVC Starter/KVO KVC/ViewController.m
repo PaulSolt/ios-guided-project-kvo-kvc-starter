@@ -66,8 +66,29 @@
     self.hrController = controller;
     
     NSLog(@"%@", self.hrController);
-    
-    
+	
+	NSString *name = philSchiller.name; // use the property
+	NSLog(@"Name1: %@", name);
+	
+	name = [philSchiller valueForKey:@"name"]; // - (NSString *)name { }
+    NSLog(@"Name2: %@", name);
+	
+	// You can access values that are "private" if you know the name of the key
+	// You can use this to reverse engineer iOS related things and call private APIs
+	
+	[philSchiller setValue:@"Philip" forKey:@"name"];
+	name = [philSchiller valueForKey:@"name"]; // - (NSString *)name { }
+    NSLog(@"Name3: %@", name);
+	
+	// This will crash if the types don't match!!!
+//	[philSchiller setValue:philSchiller forKey:@"name"];
+//	name = [philSchiller valueForKey:@"name"]; // - (NSString *)name { }
+//    NSLog(@"Name4: %@", name);
+
+	
+	
+	NSLog(@"AllEmployees: %@", self.hrController.allEmployees);
+	
 }
 
 
