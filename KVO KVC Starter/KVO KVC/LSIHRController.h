@@ -21,6 +21,11 @@ NS_ASSUME_NONNULL_BEGIN
 
 - (NSArray<LSIEmployee *> *)allEmployees;
 
+//- (LSIEmployee *)highestPaidEmployee;
+@property (nonatomic, readonly) LSIEmployee *highestPaidEmployee;
+
+- (NSInteger)highestSalary;
+
 @end
 
 NS_ASSUME_NONNULL_END

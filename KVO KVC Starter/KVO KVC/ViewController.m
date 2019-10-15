@@ -89,6 +89,28 @@
 	
 	NSLog(@"AllEmployees: %@", self.hrController.allEmployees);
 	
+	NSLog(@"All: %@", [self.hrController valueForKey:@"allEmployees"]);
+	
+	NSLog(@"Departments: %@", [self.hrController valueForKeyPath:@"departments"]);
+	
+	// NSArray of NSArrays of LSIEmployee (NSArray <NSArray<LSIEmployee *> *> *)
+	NSLog(@"departments.employees: %@", [self.hrController valueForKeyPath:@"departments.employees"]);
+	
+	// Combine into one array: NSArray<LSIEmployee *>
+	NSLog(@"departments.employees: %@", [self.hrController valueForKeyPath:@"departments.@unionOfArrays.employees"]);
+	
+	NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+	formatter.numberStyle = NSNumberFormatterCurrencyStyle;
+	formatter.alwaysShowsDecimalSeparator = NO;	// TODO: why doesn't this work at removing ".00" ... clashing with numberStyle?
+	
+	NSLog(@"Highest paid: %@", [self.hrController highestPaidEmployee]);
+	NSLog(@"Highest paid: %li", self.hrController.highestPaidEmployee.salary);
+	
+	// Boxing the number into NSNumber object
+	NSLog(@"Phil's Salary is: %@", [formatter stringFromNumber:@(self.hrController.highestPaidEmployee.salary)]);
+	
+	
+	NSLog(@"%li", self.hrController.highestSalary);
 }
 
 

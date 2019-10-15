@@ -8,6 +8,7 @@
 
 #import "LSIHRController.h"
 #import "LSIDepartment.h"
+#import "LSIEmployee.h"
 
 @interface LSIHRController ()
 
@@ -43,15 +44,21 @@
 //    return allEmployees;
 //}
 
+//- (NSArray<LSIEmployee *> *)allEmployees {
+//	// Goal: To return all employees from all departments
+//	NSArray<LSIEmployee *> *allEmployees = [[NSArray alloc] init];
+//    for (LSIDepartment *department in self.departments) {
+//		allEmployees = [allEmployees arrayByAddingObjectsFromArray:department.employees];
+//    }
+//    return allEmployees;
+//}
+
 - (NSArray<LSIEmployee *> *)allEmployees {
-	// Goal: To return all employees from all departments
-	NSArray<LSIEmployee *> *allEmployees = [[NSArray alloc] init];
-    for (LSIDepartment *department in self.departments) {
-		allEmployees = [allEmployees arrayByAddingObjectsFromArray:department.employees];
-    }
-    return allEmployees;
+    return [self valueForKeyPath:@"departments.@unionOfArrays.employees"];
 }
 
+// This method is probably the best practice when adding elements to an array because
+// you don't need to waste time reallocating the space required to store 100,000,000 employees
 //// Don't keep reallocating space because we have lots of employees and departments
 //- (NSArray<LSIEmployee *> *)allEmployees {
 //	// Find out how many employees in company
@@ -72,6 +79,20 @@
         [output appendFormat:@"%@", department];
     }
     return output;
+}
+
+- (LSIEmployee *)highestPaidEmployee {
+    LSIEmployee *highestPaid = nil;
+    for (LSIEmployee *employee in self.allEmployees) {
+        if (employee.salary > highestPaid.salary) {
+            highestPaid = employee;
+        }
+    }
+    return highestPaid;
+}
+
+- (NSInteger)highestSalary {
+    return [[[self valueForKeyPath:@"departments.@unionOfArrays.employees"] valueForKeyPath:@"@max.salary"] integerValue];
 }
 
 
