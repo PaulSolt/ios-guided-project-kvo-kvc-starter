@@ -113,5 +113,19 @@
 	NSLog(@"%li", self.hrController.highestSalary);
 }
 
+// Outlet
+
+- (IBAction)givePhilARaisePressed:(id)sender {
+	NSPredicate *nameIsPhilPredicate = [NSPredicate predicateWithFormat:@"name == %@", @"Philip"];
+	
+	LSIEmployee *phil = [[self.hrController.allEmployees filteredArrayUsingPredicate:nameIsPhilPredicate] firstObject];
+	
+	phil.salary += 7000000;
+	NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
+	formatter.numberStyle = NSNumberFormatterCurrencyStyle;
+
+	NSLog(@"Phil's Salary: %@", [formatter stringFromNumber:@(phil.salary)]);
+}
+
 
 @end
