@@ -10,11 +10,12 @@
 #import "LSIDepartment.h"
 #import "LSIEmployee.h"
 #import "LSIHRController.h"
-
+#import "LSIIRS.h"
 
 @interface ViewController ()
 
 @property (nonatomic) LSIHRController *hrController;
+@property (nonatomic) LSIIRS *irs;
 
 @end
 
@@ -111,14 +112,39 @@
 	
 	
 	NSLog(@"%li", self.hrController.highestSalary);
+	
+	// Start tracking Phil
+	
+	self.irs = [[LSIIRS alloc] init];
+	
+	[self.irs startMonitoringEmployee:philSchiller];
+	
+	// Press the button to see if monitoring works!
+	
+	// QUESTION: Where would it make sense to stop observing?
+	
+//	[self.irs stopMonitoringEmployee:philSchiller];
+//	self.irs = nil;
 }
 
 // Outlet
 
-- (IBAction)givePhilARaisePressed:(id)sender {
+- (IBAction)stopMonitoringPhil:(id)sender {
+	LSIEmployee *phil = [self getPhil];
+
+	[self.irs stopMonitoringEmployee:phil];
+}
+
+- (LSIEmployee *)getPhil {
 	NSPredicate *nameIsPhilPredicate = [NSPredicate predicateWithFormat:@"name == %@", @"Philip"];
 	
 	LSIEmployee *phil = [[self.hrController.allEmployees filteredArrayUsingPredicate:nameIsPhilPredicate] firstObject];
+
+	return phil;
+}
+
+- (IBAction)givePhilARaisePressed:(id)sender {
+	LSIEmployee *phil = [self getPhil];
 	
 	phil.salary += 7000000;
 	NSNumberFormatter *formatter = [[NSNumberFormatter alloc] init];
