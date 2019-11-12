@@ -88,7 +88,7 @@
 // Actions
 - (IBAction)highestSalaryButtonPressed:(id)sender {
 	
-	
+	NSLog(@"Highest Salary: %ld", [self.hrController highestSalary]);
 	
 }
 

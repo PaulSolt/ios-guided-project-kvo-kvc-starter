@@ -46,24 +46,28 @@
 	return [self valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
 }
 
+//- (NSInteger)highestSalary {
+//	// Calculate the highest salary
+//	LSIEmployee *employee = [self highestPaidEmployee];
+//
+//	return employee.salary;
+//}
+
+//- (LSIEmployee *)highestPaidEmployee {
+//	LSIEmployee *highestPaid = nil;
+//
+//	for (LSIEmployee *employee in [self allEmployees]) {
+//		if (employee.salary > highestPaid.salary) {
+//			highestPaid = employee;
+//		}
+//	}
+//	return highestPaid;
+//}
+
 - (NSInteger)highestSalary {
-	// Calculate the highest salary
-	LSIEmployee *employee = [self highestPaidEmployee];
-	
-	return employee.salary;
+	return [[[self allEmployees] valueForKeyPath:@"@max.salary"] integerValue];
+	// @min @avg 
 }
-
-- (LSIEmployee *)highestPaidEmployee {
-	LSIEmployee *highestPaid = nil;
-	
-	for (LSIEmployee *employee in [self allEmployees]) {
-		if (employee.salary > highestPaid.salary) {
-			highestPaid = employee;
-		}
-	}
-	return highestPaid;
-}
-
 
 - (NSString *)description {
     
