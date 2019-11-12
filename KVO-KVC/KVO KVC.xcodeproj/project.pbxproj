@@ -16,6 +16,7 @@
 		BD408816225CE27500B9C013 /* LSIEmployee.m in Sources */ = {isa = PBXBuildFile; fileRef = BD408813225CE27500B9C013 /* LSIEmployee.m */; };
 		BD408817225CE27500B9C013 /* LSIHRController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD408814225CE27500B9C013 /* LSIHRController.m */; };
 		BD408819225CE28900B9C013 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BD408818225CE28900B9C013 /* ViewController.m */; };
+		BDAD0492237B304E005C1360 /* LSIIRS.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAD0491237B304E005C1360 /* LSIIRS.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +36,8 @@
 		BD408813225CE27500B9C013 /* LSIEmployee.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSIEmployee.m; sourceTree = "<group>"; };
 		BD408814225CE27500B9C013 /* LSIHRController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LSIHRController.m; sourceTree = "<group>"; };
 		BD408818225CE28900B9C013 /* ViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		BDAD0490237B304E005C1360 /* LSIIRS.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSIIRS.h; sourceTree = "<group>"; };
+		BDAD0491237B304E005C1360 /* LSIIRS.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSIIRS.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +80,8 @@
 				BD408813225CE27500B9C013 /* LSIEmployee.m */,
 				BD408810225CE27500B9C013 /* LSIHRController.h */,
 				BD408814225CE27500B9C013 /* LSIHRController.m */,
+				BDAD0490237B304E005C1360 /* LSIIRS.h */,
+				BDAD0491237B304E005C1360 /* LSIIRS.m */,
 				BD4087FF225CE26300B9C013 /* Main.storyboard */,
 				BD408802225CE26400B9C013 /* Assets.xcassets */,
 				BD408804225CE26400B9C013 /* LaunchScreen.storyboard */,
@@ -162,6 +167,7 @@
 				BD408815225CE27500B9C013 /* LSIDepartment.m in Sources */,
 				BD408816225CE27500B9C013 /* LSIEmployee.m in Sources */,
 				BD4087FB225CE26300B9C013 /* AppDelegate.m in Sources */,
+				BDAD0492237B304E005C1360 /* LSIIRS.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

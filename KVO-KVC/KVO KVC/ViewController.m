@@ -10,15 +10,13 @@
 #import "LSIDepartment.h"
 #import "LSIEmployee.h"
 #import "LSIHRController.h"
-
+#import "LSIIRS.h"
 
 @interface ViewController ()
 
 @property (nonatomic) LSIHRController *hrController;
-
+@property (nonatomic) LSIIRS *irs;
 // Outlets
-
-
 
 
 @end
@@ -83,6 +81,9 @@
 
 	NSLog(@"Highest salary: %li\n", [self.hrController highestSalary]);
 	
+	self.irs = [[LSIIRS alloc] init];
+	[self.irs startMonitoringEmployee:philSchiller];
+	
 }
 
 // Actions
@@ -93,8 +94,10 @@
 }
 
 - (IBAction)givePhilARaisePressed:(id)sender {
-	
-	
+	NSArray *allEmployees = self.hrController.allEmployees;
+	LSIEmployee *phil = [[allEmployees filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"name == %@", @"Phil"]] firstObject];
+	phil.salary += 100000;
+	NSLog(@"Time for a raise: %@", phil);
 }
 
 
