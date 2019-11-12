@@ -16,6 +16,11 @@
 
 @property (nonatomic) LSIHRController *hrController;
 
+// Outlets
+
+
+
+
 @end
 
 @implementation ViewController
@@ -76,7 +81,22 @@
 
 	NSLog(@"%@\n", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"]);
 
+	NSLog(@"Highest salary: %li\n", [self.hrController highestSalary]);
+	
 }
+
+// Actions
+- (IBAction)highestSalaryButtonPressed:(id)sender {
+	
+	
+	
+}
+
+- (IBAction)givePhilARaisePressed:(id)sender {
+	
+	
+}
+
 
 
 @end
