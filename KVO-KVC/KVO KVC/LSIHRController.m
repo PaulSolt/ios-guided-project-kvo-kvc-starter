@@ -33,6 +33,13 @@
     return [self.internalDepartments copy];
 }
 
+- (NSArray<LSIEmployee *> *)allEmployees {
+	
+	// TODO: Make an array of all the employees
+	
+	
+	return nil; // TODO: return the result
+}
 
 
 - (NSString *)description {
