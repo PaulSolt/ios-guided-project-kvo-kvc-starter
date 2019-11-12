@@ -28,7 +28,7 @@
     self.startDate = [NSDate date];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
                                                   target:self
-                                                selector:@selector(updateTimer:)
+                                                selector:@selector(updateTimer:) // #selector()
                                                 userInfo:nil
                                                  repeats:YES];
     self.running = YES;
