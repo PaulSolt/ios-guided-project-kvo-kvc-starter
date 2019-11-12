@@ -67,7 +67,15 @@
     
     NSLog(@"%@", self.hrController);
     
-    
+	NSLog(@"All Employees: %@", self.hrController.allEmployees);
+	
+//	printf("%s\n", [[[self.hrController valueForKeyPath:@"departments"] description] UTF8String]);
+	NSLog(@"%@\n", [self.hrController valueForKeyPath:@"departments"]);
+
+	NSLog(@"%@\n", [self.hrController valueForKeyPath:@"departments.employees"]);
+
+	NSLog(@"%@\n", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"]);
+
 }
 
 

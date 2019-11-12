@@ -33,12 +33,16 @@
     return [self.internalDepartments copy];
 }
 
+//- (NSArray<LSIEmployee *> *)allEmployees {
+//    NSMutableArray *allEmployees = [[NSMutableArray alloc] init];
+//    for (LSIDepartment *department in self.departments) {
+//        [allEmployees addObjectsFromArray:department.employees];
+//    }
+//    return allEmployees;
+//}
+
 - (NSArray<LSIEmployee *> *)allEmployees {
-	
-	// TODO: Make an array of all the employees
-	
-	
-	return nil; // TODO: return the result
+	return [self valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
 }
 
 
