@@ -10,6 +10,8 @@
 
 @implementation LSIEmployee
 
+//@property NSString *description;
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@, Title: %@, Salary: %li", self.name, self.jobTitle, self.salary];
 }

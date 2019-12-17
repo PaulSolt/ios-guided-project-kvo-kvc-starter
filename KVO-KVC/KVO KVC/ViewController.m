@@ -67,7 +67,25 @@
     
     NSLog(@"%@", self.hrController);
     
-    
+	
+	NSLog(@"Departments: %@", self.hrController.departments);  // Property
+	NSLog(@"Departments: %@", [self.hrController departments]); // Message calling
+
+	// [Departments]
+	NSLog(@"Departments: %@", [self.hrController valueForKeyPath:@"departments"]); // KVC
+
+	// [[Employee]]
+	NSLog(@"Departments employees: %@", [self.hrController valueForKeyPath:@"departments.employees"]);
+
+	// [Employee]
+	NSLog(@"All employees: %@", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"]);
+	
+	NSArray *allEmployees = [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
+	
+	NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"salary"]);
+	NSLog(@"Highest Salary: %@", [allEmployees valueForKeyPath:@"@max.salary"]); // @min @max @avg
+	NSLog(@"Average Salary: %@", [allEmployees valueForKeyPath:@"@avg.salary"]); // @min @max @avg
+
 }
 
 
