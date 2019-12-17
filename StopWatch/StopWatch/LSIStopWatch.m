@@ -11,9 +11,11 @@
 
 @interface LSIStopWatch ()
 
+// Private properties readwrite
 @property (nonatomic, readwrite, getter=isRunning) BOOL running;
 @property (nonatomic, readwrite) NSTimeInterval elapsedTime;
 
+// Private Properties
 @property (nonatomic) NSDate *startDate;
 @property (nonatomic) NSTimer *timer;
 

@@ -9,9 +9,9 @@
 #import "ViewController.h"
 #import "LSIStopWatch.h"
 
-
-// TODO: Create a KVOContext to identify the StopWatch observer
-
+// Create a KVOContext to identify the StopWatch observer
+// void * = (id in Objective-C) AnyObject in Swift
+void *KVOContext = &KVOContext;  // store the address of KVOContext 234939392010 (0x20F39E3A0)
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -30,6 +30,7 @@
     
     self.stopwatch = [[LSIStopWatch alloc] init];
 	[self.timeLabel setFont:[UIFont monospacedDigitSystemFontOfSize: self.timeLabel.font.pointSize  weight:UIFontWeightMedium]];
+	
 }
 
 - (IBAction)resetButtonPressed:(id)sender {
@@ -71,23 +72,46 @@
     if (stopwatch != _stopwatch) {
         
         // willSet
-		// TODO: Cleanup KVO - Remove Observers
-
+		// Cleanup KVO - Remove Observers
+		[_stopwatch removeObserver:self forKeyPath:@"running" context:KVOContext];
+		[_stopwatch removeObserver:self forKeyPath:@"elapsedTime" context:KVOContext];
+		
         _stopwatch = stopwatch;
         
         // didSet
-		// TODO: Setup KVO - Add Observers
+		// Setup KVO - Add Observers
+		
+		// What state change do I want to listen for?
+		// running
+		// reset
+		// elapsedtime
+		[_stopwatch addObserver:self forKeyPath:@"running" options:NSKeyValueObservingOptionInitial context:KVOContext];
+
+		[_stopwatch addObserver:self forKeyPath:@"elapsedTime" options:NSKeyValueObservingOptionInitial context:KVOContext];
+
     }
     
 }
 
-
-// TODO: Review docs and implement observerValueForKeyPath
-
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+	if (context == KVOContext) {
+		
+		if ([keyPath isEqualToString:@"running"]) {
+			[self updateViews];
+		} else if ([keyPath isEqualToString:@"elapsedTime"]) {
+			[self updateViews];
+		}
+		
+	} else {
+		[super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+	}
+}
 
 - (void)dealloc {
-	// TODO: Stop observing KVO (otherwise it will crash randomly)
-    
+	NSLog(@"dealloc");
+	// Stop observing KVO (otherwise it will crash randomly)
+	self.stopwatch = nil;
 }
 
 @end
