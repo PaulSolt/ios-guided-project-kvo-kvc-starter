@@ -91,8 +91,14 @@
 
 //    NSString *name2 = [craig valueForKey:@"name"];
 //    NSString *name2 = [craig valueForKey:@"firstName"]; // No build issues, CRASHES at runtime!
-    NSString *name2 = [craig valueForKey:@"privateName"]; // No build issues, accesses a private property
-    NSLog(@"Name2: %@", name2);
+    
+    NSString *privateName = [craig valueForKey:@"privateName"]; // No build issues, accesses a private property
+    NSLog(@"privateName: %@", privateName);
+
+    NSString *privateVariable = [craig valueForKey:@"privateVariable"]; // No build issues, accesses a private property
+    NSLog(@"privateVariable: %@", privateVariable);
+    
+    
     
     [craig setValue:@"Bob" forKey:@"name"];
     NSLog(@"Name Change: %@", craig.name);
@@ -100,7 +106,7 @@
     // 1. Spelling is very important when using keys (Crash at runtime)
     // 2. Types must match or it'll crash
     
-    [craig setValue:@42 forKey:@"name"];        // Converted NSNumber to NSString and set it
+    [craig setValue:@42 forKey:@"name"];        // NO CRASH! Converted NSNumber to NSString and set it
     NSLog(@"Name Change: %@", craig.name);
 
     // "age" : "42"

@@ -8,7 +8,9 @@
 
 #import "LSIEmployee.h"
 
-@interface LSIEmployee ()
+@interface LSIEmployee () {
+    NSString *_privateVariable;
+}
 
 // Private property
 @property (nonatomic, copy) NSString *privateName;
@@ -21,6 +23,7 @@
     self = [super init];
     if (self) {
         _privateName = @"Hair Force One";
+        _privateVariable = @"Secret Message";
     }
     return self;
 }
