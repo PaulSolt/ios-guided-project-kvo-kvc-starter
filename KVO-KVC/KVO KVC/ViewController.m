@@ -94,7 +94,60 @@
     NSString *name2 = [craig valueForKey:@"privateName"]; // No build issues, accesses a private property
     NSLog(@"Name2: %@", name2);
     
+    [craig setValue:@"Bob" forKey:@"name"];
+    NSLog(@"Name Change: %@", craig.name);
     
+    // 1. Spelling is very important when using keys (Crash at runtime)
+    // 2. Types must match or it'll crash
+    
+    [craig setValue:@42 forKey:@"name"];        // Converted NSNumber to NSString and set it
+    NSLog(@"Name Change: %@", craig.name);
+
+    // "age" : "42"
+    
+    // Collections and Keypaths
+
+    //    NSLog(@"Departments1: %@", [[self hrController] departments]); // method calling
+    //    NSLog(@"Departments2: %@", self.hrController.departments); // dot syntax
+
+    // keypath: departments
+
+    NSLog(@"Departments3a: %@", [self.hrController valueForKeyPath:@"departments"]); // dot syntax
+    NSLog(@"Departments3b: %@", [self.hrController valueForKey:@"departments"]); // dot syntax
+
+    
+    // Traversing the objects LSIHRController (departments) . LSIDepartment (name)
+    NSLog(@"Department Name: %@", [self.hrController valueForKeyPath:@"departments.name"]);
+//    NSLog(@"Department Name: %@", [self.hrController valueForKey:@"departments.name"]); // CRASH! Not a property/method name
+
+    // like a .map to aggrega1te all the department employee arrays into a big array of arrays
+    // [[Employee]]
+    NSLog(@"Department Employees: %@", [self.hrController valueForKeyPath:@"departments.employees"]);
+    
+    
+    // Collection Operators
+
+    // Goal: [Employee]
+    // @distinctUnionOfArrays = unique values
+//    NSLog(@"Department Employees: %@", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"]);
+    
+    NSArray<LSIEmployee *> *allEmployees = [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
+    NSLog(@"Department Employees: %@", allEmployees);
+
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"salary"]);
+    NSLog(@"Max Salary: %@", [allEmployees valueForKeyPath:@"@max.salary"]);
+
+    // TODO: Print another collection operator on the allEmployees
+
+    NSLog(@"Avg Salary: %@", [allEmployees valueForKeyPath:@"@avg.salary"]);
+    NSLog(@"Count Salaries: %@", [allEmployees valueForKeyPath:@"@count.salary"]);
+
+    // Count the number of employees
+    
+//    NSLog(@"Count employees: %@", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees.@count"]); // Doesn't work! =(
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"@count"]); // 2 step process
+
+
 }
 
 
