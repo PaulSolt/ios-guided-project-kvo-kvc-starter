@@ -32,7 +32,7 @@
                                                 userInfo:nil
                                                  repeats:YES];
     self.running = YES;
-    
+//    [self updateTimer:self.timer]; // We can force an update call, or just use KVO to listen to "running"
 }
 
 - (void)stop {
@@ -53,6 +53,10 @@
 	// If you pause/start the timer it will keep track of the original
 	// time so it doesn't start from 0 each time
 	
+    // QUESTION: What happens with this instance variable
+//    _elapsedTime = [[NSDate date] timeIntervalSinceDate:self.startDate] + self.previouslyAccumulatedTime; // NOT KVC Compliant!
+    // The above won't give us updates
+    
     self.elapsedTime = [[NSDate date] timeIntervalSinceDate:self.startDate] + self.previouslyAccumulatedTime;
 }
 

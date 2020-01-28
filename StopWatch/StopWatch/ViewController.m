@@ -78,8 +78,14 @@ void *KVOContext = &KVOContext; // 0x123 == 291 // just a number!
     if (stopwatch != _stopwatch) {
         
         // willSet
-		// TODO: Cleanup KVO - Remove Observers
+		// Cleanup KVO - Remove Observers
 
+        // The first time we call this method, _stopwatch is nil
+        if (_stopwatch) {
+            [_stopwatch removeObserver:self forKeyPath:@"running" context:KVOContext];
+            [_stopwatch removeObserver:self forKeyPath:@"elaspedTime" context:KVOContext];
+        }
+        
         _stopwatch = stopwatch;
         
         // didSet
@@ -87,8 +93,11 @@ void *KVOContext = &KVOContext; // 0x123 == 291 // just a number!
         // Setup KVO - Add Observers
         // context = who is listening (unique to our class)
         
-        [_stopwatch addObserver:self forKeyPath:@"running" options:0 context:KVOContext];
-        [_stopwatch addObserver:self forKeyPath:@"elapsedTime" options:0 context:KVOContext];
+        // In dealloc when we set `self.stopwatch = nil` this will not run
+        if (_stopwatch) {
+            [_stopwatch addObserver:self forKeyPath:@"running" options:NSKeyValueObservingOptionInitial context:KVOContext];
+            [_stopwatch addObserver:self forKeyPath:@"elapsedTime" options:NSKeyValueObservingOptionInitial context:KVOContext];
+        }
     }
     
 }
@@ -115,8 +124,8 @@ void *KVOContext = &KVOContext; // 0x123 == 291 // just a number!
 
 
 - (void)dealloc {
-	// TODO: Stop observing KVO (otherwise it will crash randomly)
-    
+	// Stop observing KVO (otherwise it will crash randomly)
+    self.stopwatch = nil;
 }
 
 @end
