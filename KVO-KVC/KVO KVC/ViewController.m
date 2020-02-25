@@ -67,7 +67,53 @@
     
     NSLog(@"%@", self.hrController);
     
+    NSLog(@"%@", craig.name); // Checked by the compiler (name property exists it compiles, else compiler error)
+
+    NSLog(@"%@", [craig valueForKey:@"name"]);
+    //    NSLog(@"%@", [craig valueForKey:@"nameEE"]); // CRASH: this class is not key value coding-compliant for the key nameEE (Storyboards)
+
+    [craig setValue:@"Bob" forKey:@"name"]; // Setter to change Craig's name
+    NSLog(@"%@", [craig valueForKey:@"name"]); // Getter to get Craig's name
+
+    // .h (header) public
+    // .m (implemention) private
+
+    // Private API call (Apple prevents you from shipping apps on the App Store that call private APIs)
+
+    NSLog(@"%@", [craig valueForKey:@"privateName"]);
+    NSLog(@"%@", [craig valueForKey:@"privateVariable"]); // Objc will search for either propertyName or the _instanceVariable name
+    NSLog(@"%@", [craig valueForKey:@"_privateVariable"]);
+
+    // KeyPath: traverse the object heirarchy
+
+    NSLog(@"Departments: %@", self.hrController.departments); // dot syntax
+    NSLog(@"Departments: %@", [[self hrController] departments]); // message calling
+
+    // [Departments]
+    NSLog(@"Departments: %@", [self.hrController valueForKeyPath:@"departments"]);
+
+    // [[Employees]]
+    NSLog(@"Departments.employees: %@", [self.hrController valueForKeyPath:@"departments.employees"]);
+
+    // [Employees]
+    NSArray *allEmployees = [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
+    NSLog(@"Departments.employees (union): %@", allEmployees);
+
+//    NSMutableArray *array = [[NSMutableArray alloc] init];
+//    for (LSIDepartment *department in self.hrController.departments) {
+//        for (LSIEmployee *employee in department.employees) {
+//            if (![array containsObject:employee]) {
+//                [array addObject:employee];
+//            }
+//        }
+//    }
+//    NSLog(@"All employees: %@", array);
     
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"salary"]);  // map (Employee -> Salary)
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"@max.salary"]);
+    
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"@avg.salary"]);
+
 }
 
 

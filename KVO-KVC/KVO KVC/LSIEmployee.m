@@ -8,7 +8,29 @@
 
 #import "LSIEmployee.h"
 
+@interface LSIEmployee () {
+    // private instance variable
+    NSString *_privateVariable;
+}
+
+// Private Property
+@property (nonatomic, copy) NSString *privateName;
+
+@end
+
+
 @implementation LSIEmployee
+
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        _privateName = @"Hair Force One";
+        _privateVariable = @"Secret message";
+        
+    }
+    return self;
+}
+
 
 - (void)boostSalary {
     // KVC: Key Value Coding - compliant, always use the property setter/getter
