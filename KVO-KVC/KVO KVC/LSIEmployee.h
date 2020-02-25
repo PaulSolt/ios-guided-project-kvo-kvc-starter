@@ -16,6 +16,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, copy) NSString *jobTitle;
 @property (nonatomic) NSInteger salary;
 
+- (void)boostSalary;
+
 @end
 
 NS_ASSUME_NONNULL_END
