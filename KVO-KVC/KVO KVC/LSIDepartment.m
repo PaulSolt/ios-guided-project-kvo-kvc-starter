@@ -33,6 +33,9 @@
     return [[self.internalEmployees copy] arrayByAddingObject:self.manager];
 }
 
+// Swift
+// CustomStringConvertible
+
 - (NSString *)description {
     return [NSString stringWithFormat:@"Department: %@\n\tManager: %@\n\tEmployees: %@", self.name, self.manager, self.employees];
 }

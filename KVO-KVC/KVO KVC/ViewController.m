@@ -67,6 +67,49 @@
     
     NSLog(@"%@", self.hrController);
     
+    // Key Value Coding: KVC
+
+    // Property setter
+    craig.name = @"Craig1";     // Compiler will complain if we have a typo
+    [craig setName:@"Craig2"];
+
+    // KVC (Using strings to represent names for the properties)
+    [craig setValue:@"Bob" forKey:@"name"];
+    NSLog(@"Name: %@", craig.name);
+
+    //    [craig setValue:@"Bob" forKey:@"firstName"]; // CRASH: There is no firstName property
+
+    NSString *name = [craig valueForKey:@"name"];
+    NSLog(@"Accessed name: %@", name);
+
+    NSString *privateName = [craig valueForKey:@"privateName"]; // private property
+    NSLog(@"privateName: %@", privateName);
+
+    NSString *privateVariable = [craig valueForKey:@"privateVariable"]; // private ivar
+    NSLog(@"privateVariable: %@", privateVariable);
+
+
+    // Private Properties and Variables are not 100% private
+    
+    // [Departments]
+    NSLog(@"Departments: %@", self.hrController.departments); // dot syntax
+    NSLog(@"Departments: %@", [self.hrController valueForKeyPath:@"departments"]);
+
+    // Traverse the objects using string values
+
+    // Swift: [[Employee]]
+    NSLog(@"Employees: %@", [self.hrController valueForKeyPath:@"departments.employees"]);
+
+    // Collection Operators
+
+    // Swift: [Employee]
+    NSArray *allEmployees = [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
+    NSLog(@"Employees: %@", allEmployees);
+
+    NSLog(@"Salaries: %@", [allEmployees valueForKeyPath:@"salary"]);
+    NSLog(@"Max Salary: %@", [allEmployees valueForKeyPath:@"@max.salary"]);
+    NSLog(@"Average Salary: %@", [allEmployees valueForKeyPath:@"@avg.salary"]);
+    
     
 }
 
