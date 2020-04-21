@@ -33,12 +33,23 @@
     return [self.internalDepartments copy];
 }
 
+//- (NSArray<LSIEmployee *> *)allEmployees {
+//    // Array to store values (mutable)
+//    // Append elements (or arrays)
+//    // Return the result
+//
+//    NSMutableArray *employees = [[NSMutableArray alloc] init];
+//    for (LSIDepartment *department in self.departments) {
+//        //        for (LSIEmployee *employee in department.employees) {
+//        //            [employees addObject:employee];
+//        //        }
+//        [employees addObjectsFromArray:department.employees];
+//    }
+//    return [employees copy];
+//}
+
 - (NSArray<LSIEmployee *> *)allEmployees {
-    // Array to store values (mutable)
-    // Append elements (or arrays)
-    // Return the result
-    
-    return nil;
+    return [self valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"];
 }
 
 - (NSString *)description {

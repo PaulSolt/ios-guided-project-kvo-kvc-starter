@@ -105,6 +105,28 @@
     NSInteger test = @"Empty".integerValue; // 0 if this isn't a number
     NSLog(@"test: %ld", test);
     NSLog(@"Salary: %ld", craig.salary);
+    
+    // keyPath
+    // collection operators
+    
+    NSLog(@"%@", self.hrController.allEmployees);
+    
+    // [Departments]
+    NSLog(@"%@", [self.hrController valueForKeyPath:@"departments"]);
+    
+    // [[Employees]] -> (NSArray<NSArray<LSIEmployee *> *> *)
+    NSLog(@"%@", [self.hrController valueForKeyPath:@"departments.employees"]);
+    
+    // Collection Operators
+    
+    // [Employees]
+    NSLog(@"%@", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"]);
+    
+    // [NSNumber]
+    NSLog(@"Salaries: %@", [self.hrController.allEmployees valueForKeyPath:@"salary"]);
+    
+    // NSNumber
+    NSLog(@"max Salary: %@", [self.hrController.allEmployees valueForKeyPath:@"@max.salary"]);
 }
 
 
