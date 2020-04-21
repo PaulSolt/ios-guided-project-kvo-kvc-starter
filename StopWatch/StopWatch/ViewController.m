@@ -10,8 +10,9 @@
 #import "LSIStopWatch.h"
 
 
-// TODO: Create a KVOContext to identify the StopWatch observer
-
+// Create a KVOContext to identify the StopWatch observer
+// Storing a unique value for this code file
+void *KVOContext = &KVOContext; // 234939393838 (street address)
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -76,14 +77,32 @@
         _stopwatch = stopwatch;
         
         // didSet
-		// TODO: Setup KVO - Add Observers
+		// Setup KVO - Add Observers
+        
+        // nullable void * = nullable id (AnyObject?)
+        [_stopwatch addObserver:self forKeyPath:@"running" options:0 context:KVOContext];
+        [_stopwatch addObserver:self forKeyPath:@"elapsedTime" options:0 context:KVOContext];
     }
     
 }
 
 
-// TODO: Review docs and implement observerValueForKeyPath
-
+// Review docs and implement observerValueForKeyPath
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
+    if (context == KVOContext) { // Verifies the message is indended for us
+        NSLog(@"%@ = %@", keyPath, [object valueForKeyPath:keyPath]);
+        
+        // How can I update the UI based on changes to the stopwatch properties?
+        if ([keyPath isEqualToString:@"running"]) {
+            [self updateViews];
+        } else if ([keyPath isEqualToString:@"elapsedTime"]) {
+            [self updateViews];
+        }
+        
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
 - (void)dealloc {
 	// TODO: Stop observing KVO (otherwise it will crash randomly)

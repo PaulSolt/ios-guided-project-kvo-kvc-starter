@@ -24,6 +24,9 @@
 
 @implementation LSIStopWatch
 
+// Always use _propertyName in your init/dealloc or getter/setter
+
+
 - (void)start {
     self.startDate = [NSDate date];
     self.timer = [NSTimer scheduledTimerWithTimeInterval:0.1
@@ -31,7 +34,10 @@
                                                 selector:@selector(updateTimer:)
                                                 userInfo:nil
                                                  repeats:YES];
+    
+    // MUST Modify KVC compliant properties using self. syntax, not _running!!!!
     self.running = YES;
+//    _running = YES;
     
 }
 
@@ -54,6 +60,10 @@
 	// time so it doesn't start from 0 each time
 	
     self.elapsedTime = [[NSDate date] timeIntervalSinceDate:self.startDate] + self.previouslyAccumulatedTime;
+
+    // DON'T USE _elapsedTime or we don't get events to observe
+//    _elapsedTime = [[NSDate date] timeIntervalSinceDate:self.startDate] + self.previouslyAccumulatedTime;
+//    NSLog(@"elapsedTime: %0.2f", self.elapsedTime);
 }
 
 
