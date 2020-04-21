@@ -19,6 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, copy, readonly) NSArray<LSIDepartment *> *departments;
 
+@property (nonatomic, readonly) NSArray<LSIEmployee *> *allEmployees;
+
 @end
 
 NS_ASSUME_NONNULL_END

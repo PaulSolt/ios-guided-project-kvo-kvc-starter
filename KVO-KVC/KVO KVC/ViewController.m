@@ -26,12 +26,11 @@
 
     LSIDepartment *marketing = [[LSIDepartment alloc] init];
     marketing.name = @"Marketing";
-    LSIEmployee * philSchiller = [[LSIEmployee alloc] init];
+    LSIEmployee *philSchiller = [[LSIEmployee alloc] init];
     philSchiller.name = @"Phil";
     philSchiller.jobTitle = @"VP of Marketing";
     philSchiller.salary = 10000000; 
     marketing.manager = philSchiller;
-
     
     LSIDepartment *engineering = [[LSIDepartment alloc] init];
     engineering.name = @"Engineering";
@@ -67,7 +66,45 @@
     
     NSLog(@"%@", self.hrController);
     
+    // KVC - Key Value Coding
+
+    // 1. Property setter:
+    //    - (void)setVariableName:(MyType *)variable
+    // 2. Property getter:
+    //    - (MyType *)variableName;
+    // 3. Backing instance variable
+    //    MyType *_variableName;
+
+    // If we follow the convention we can call methods using a dynamic string name
+
+    // KVO + KVC power Core Data, Storyboards, IBActions/IBOutlets
+
+    // At compile time there is no type checking, name checking, spelling checking
+    NSString *name = [craig valueForKey:@"name"]; // Sending a message with string value: @"name"
+    //NSString *name = [craig valueForKey:@"firstName"]; // Crashes because firstName doesn't exist!
+
+    NSLog(@"Name: %@", name);
+
+    name = craig.name;   // dot syntax that calls the method [craig name]
+    //name = craig.nname;   // Error: Fails to Compile! Properties are checked at compile time
+    name = [craig name]; // method
     
+    // You can change values using the key
+    [craig setValue:@"Hair Force One" forKey:@"name"];
+    NSLog(@"Name: %@", craig.name);
+
+    [craig setValue:@2000000 forKey:@"salary"];
+    NSLog(@"Salary: %ld", craig.salary);
+
+    // Be careful with setting the wrong type on an object, it can have unpredictable results at
+    // runtime
+    [craig setValue:@2 forKey:@"name"]; // @2 -> NSNumber(2) -> description -> @"2" (does not crash)
+    NSLog(@"Name: %@", craig.name);
+
+    [craig setValue:@"Empty" forKey:@"salary"]; // NSString -> longValue -> default to 0
+    NSInteger test = @"Empty".integerValue; // 0 if this isn't a number
+    NSLog(@"test: %ld", test);
+    NSLog(@"Salary: %ld", craig.salary);
 }
 
 

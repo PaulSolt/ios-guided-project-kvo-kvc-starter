@@ -33,12 +33,17 @@
     return [self.internalDepartments copy];
 }
 
-
+- (NSArray<LSIEmployee *> *)allEmployees {
+    // Array to store values (mutable)
+    // Append elements (or arrays)
+    // Return the result
+    
+    return nil;
+}
 
 - (NSString *)description {
-    
     NSMutableString *output = [[NSMutableString alloc] init];
-    
+
     [output appendString:@"Departments:\n"];
     for (LSIDepartment *department in self.departments) {
         [output appendFormat:@"%@", department];
