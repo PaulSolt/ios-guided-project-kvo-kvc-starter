@@ -66,8 +66,27 @@
 //    NSLog(@"elapsedTime: %0.2f", self.elapsedTime);
 }
 
+// Disable automatic change notifications (manual control)
++ (BOOL)automaticallyNotifiesObserversForKey:(NSString *)key {
+    BOOL automatic = YES;
+    if ([key isEqualToString:@"elapsedTime"]) {
+        automatic = NO;
+    } else {
+        automatic = [super automaticallyNotifiesObserversForKey:key];
+    }
+    return automatic;
+}
 
 #pragma mark - Properties
+
+// Manually control how we notify observers
+- (void)setElapsedTime:(NSTimeInterval)elapsedTime {
+    [self willChangeValueForKey:@"elapsedTime"];
+    
+    _elapsedTime = elapsedTime;
+    
+    [self didChangeValueForKey:@"elapsedTime"];
+}
 
 - (void)setTimer:(NSTimer *)timer {
     if (timer != _timer) {

@@ -70,9 +70,13 @@ void *KVOContext = &KVOContext; // 234939393838 (street address)
 - (void)setStopwatch:(LSIStopWatch *)stopwatch {
     
     if (stopwatch != _stopwatch) {
-        
         // willSet
-		// TODO: Cleanup KVO - Remove Observers
+		// Cleanup KVO - Remove Observers
+        
+        // if _stopWatch is nil nothing will happen if we call a method
+        // no-op= no operation
+        [_stopwatch removeObserver:self forKeyPath:@"running" context:KVOContext];
+        [_stopwatch removeObserver:self forKeyPath:@"elapsedTime" context:KVOContext];
 
         _stopwatch = stopwatch;
         
@@ -80,12 +84,10 @@ void *KVOContext = &KVOContext; // 234939393838 (street address)
 		// Setup KVO - Add Observers
         
         // nullable void * = nullable id (AnyObject?)
-        [_stopwatch addObserver:self forKeyPath:@"running" options:0 context:KVOContext];
-        [_stopwatch addObserver:self forKeyPath:@"elapsedTime" options:0 context:KVOContext];
+        [_stopwatch addObserver:self forKeyPath:@"running" options:NSKeyValueObservingOptionInitial context:KVOContext];
+        [_stopwatch addObserver:self forKeyPath:@"elapsedTime" options:NSKeyValueObservingOptionInitial context:KVOContext];
     }
-    
 }
-
 
 // Review docs and implement observerValueForKeyPath
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -105,7 +107,8 @@ void *KVOContext = &KVOContext; // 234939393838 (street address)
 }
 
 - (void)dealloc {
-	// TODO: Stop observing KVO (otherwise it will crash randomly)
+	// Stop observing KVO (otherwise it will crash randomly)
+    self.stopwatch = nil; // clear our observers
     
 }
 
