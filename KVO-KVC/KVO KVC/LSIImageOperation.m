@@ -33,22 +33,51 @@
 /*  Objective-C NSOperation subclass should override isAsynchronous to return YES, then update the ready, executing and finished properties during the NSURLSessionDataTask's execution. These properties are observed by the NSOperationQueue machinery using KVO, and therefore your use of them must be KVO-compliant.
 */
 
-
 // More advanced NSOperation does work async
 - (void)start {
-    // TODO: Update isExecuting to YES
     self.internalIsExecuting = YES; // readonly, use our own property with dependent key
     
-    // TODO: Deal with canceling
     NSLog(@"LSIImageOperation.start");
-    // Use NSURLSession dataTask
-    
-    
-    // TODO: Update isExecuting to NO (async)
-    // TODO: Update isFinished to YES
-    self.internalIsExecuting = NO;
-    self.internalIsFinished = YES;
+
+    // Don't start work if we're canceled
+    if (!self.isCancelled) {
+        NSURLComponents *urlComponents = [[NSURLComponents alloc] initWithURL:self.url resolvingAgainstBaseURL:NO];
+        urlComponents.scheme = @"https";
+        NSURL *finalURL = urlComponents.URL;
+        NSURLSessionDataTask *task = [NSURLSession.sharedSession dataTaskWithURL:finalURL completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+            NSLog(@"URL: %@", finalURL);
+            if (error) {
+                NSLog(@"Error!: %@", error);
+                
+                // Don't forget to update the state if we fail
+                self.internalIsExecuting = NO;
+                self.internalIsFinished = YES;
+                self.image = nil;
+                return;
+            }
+            if (!data) {
+                NSLog(@"Data is nil");
+                
+                // Don't forget to update the state if we fail
+                self.internalIsExecuting = NO;
+                self.internalIsFinished = YES;
+                self.image = nil;
+                return;
+            }
+            
+            UIImage *image = [UIImage imageWithData:data];
+            NSLog(@"image.size: %@", NSStringFromCGSize(image.size));
+            self.image = image;
+            
+            self.internalIsExecuting = NO;
+            self.internalIsFinished = YES;
+        }];
+        [task resume];
+    }
 }
+
+
+
 
 // Override NSOperation properties
 
