@@ -15,8 +15,9 @@
 @property (nonatomic) BOOL internalIsExecuting;
 @property (nonatomic) BOOL internalIsFinished;
 
-@property (nonatomic) BOOL internalIsCanceled;
-@property (nonatomic) BOOL internalIsReady;
+//@property (nonatomic) BOOL internalIsCanceled; // we don't need to manage, just check to make sure the work still should be done in start/main methods
+
+//@property (nonatomic) BOOL internalIsReady; // we don't need to manage (based on dependent operations)
 
 @end
 
@@ -75,9 +76,6 @@
         [task resume];
     }
 }
-
-
-
 
 // Override NSOperation properties
 
