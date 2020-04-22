@@ -89,6 +89,14 @@ void *KVOContext = &KVOContext; // 234939393838 (street address)
     }
 }
 
+func presentationControllerShouldDismiss(_ presentationController: UIPresentationController) -> Bool {
+    if isDataValid() {
+        return true
+    }
+    return false
+}
+
+
 // Review docs and implement observerValueForKeyPath
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
     if (context == KVOContext) { // Verifies the message is indended for us
