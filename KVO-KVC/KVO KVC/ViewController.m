@@ -140,6 +140,7 @@
 - (NSOperationQueue *)operationQueue {
     if (!_operationQueue) {
         _operationQueue = [[NSOperationQueue alloc] init];
+        _operationQueue.maxConcurrentOperationCount = 1;
     }
     return _operationQueue;
 }
@@ -151,11 +152,30 @@
     // FUTURE: Could submit an Issue on Github to fix the data to use https
     
     NSURL *photoURL = [NSURL URLWithString:@"https://mars.jpl.nasa.gov/msl-raw-images/proj/msl/redops/ods/surface/sol/01000/opgs/edr/fcam/FRB_486265257EDR_F0481570FHAZ00323M_.JPG"];
-    LSIImageOperation *imageOperation = [[LSIImageOperation alloc] initWithURL:photoURL];
+    LSIImageOperation *imageOperation1 = [[LSIImageOperation alloc] initWithURL:photoURL];
+    LSIImageOperation *imageOperation2 = [[LSIImageOperation alloc] initWithURL:photoURL];
+
+    
+    // Observe isFinished
+    [imageOperation1 addObserver:self forKeyPath:@"finished" options:0 context:nil];
+    
     
     // start work by adding to queue
-    [self.operationQueue addOperation:imageOperation];
+    [self.operationQueue addOperation:imageOperation1];
+    [self.operationQueue addOperation:imageOperation2];
+
 }
 
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if ([keyPath isEqualToString:@"finished"]) {
+        NSLog(@"Finished an Operation");
+        
+        // Remove the observer
+        [object removeObserver:self forKeyPath:@"finished" context:nil];
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
 @end
