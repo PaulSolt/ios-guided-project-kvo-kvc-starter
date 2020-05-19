@@ -85,6 +85,7 @@
     // System will search for _likesLongWalksOnBeach and likesLongWalksOnBeach
     NSLog(@"Long walks: %@",[craig valueForKey:@"likesLongWalksOnBeach"]);
     
+    NSLog(@"%@", self.hrController.allEmployees);
     
 }
 

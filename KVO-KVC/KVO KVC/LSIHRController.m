@@ -44,5 +44,9 @@
     return output;
 }
 
+- (NSArray<LSIEmployee *> *)allEmployees {
+    return nil;
+}
+
 
 @end
