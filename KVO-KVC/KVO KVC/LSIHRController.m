@@ -36,9 +36,7 @@
 
 
 - (NSString *)description {
-    
     NSMutableString *output = [[NSMutableString alloc] init];
-    
     [output appendString:@"Departments:\n"];
     for (LSIDepartment *department in self.departments) {
         [output appendFormat:@"%@", department];

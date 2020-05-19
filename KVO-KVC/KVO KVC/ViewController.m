@@ -66,6 +66,24 @@
     self.hrController = controller;
     
     NSLog(@"%@", self.hrController);
+
+    NSLog(@"%@", craig);
+    // Key Value Coding (dictionary)
+    // "name"
+    NSLog(@"%@", craig.name); // dot syntax: checked by compiler
+    NSLog(@"%@", [craig name]); // method call: checked by compiler
+
+    NSLog(@"%@", [craig valueForKey:@"name"]); // not checked by compiler for being a valid key path
+
+    [craig setValue:@"Hair Force Craig" forKey:@"name"];
+//    [craig setValue:@"Hair Force Craig" forKey:@"nameeee"];
+    // @"nameee" crashes! this class is not key value coding-compliant for the key nameeee.'
+
+
+    NSLog(@"%@", craig.name);
+    
+    // System will search for _likesLongWalksOnBeach and likesLongWalksOnBeach
+    NSLog(@"Long walks: %@",[craig valueForKey:@"likesLongWalksOnBeach"]);
     
     
 }
