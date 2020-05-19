@@ -75,8 +75,8 @@
 
     NSLog(@"%@", [craig valueForKey:@"name"]); // not checked by compiler for being a valid key path
 
-    [craig setValue:@"Hair Force Craig" forKey:@"name"];
-//    [craig setValue:@"Hair Force Craig" forKey:@"nameeee"];
+    [craig setValue:@"Hair Force One" forKey:@"name"];
+//    [craig setValue:@"Hair Force One" forKey:@"nameeee"];
     // @"nameee" crashes! this class is not key value coding-compliant for the key nameeee.'
 
 
