@@ -87,6 +87,19 @@
     
     NSLog(@"%@", self.hrController.allEmployees);
     
+    // keypath
+    NSLog(@"departments: %@", self.hrController.departments); // dot syntax
+    NSLog(@"departments: %@", [self.hrController valueForKeyPath:@"departments"]); // kvc
+
+    // [[Employee]]
+    NSLog(@"keypath: %@", [self.hrController valueForKeyPath:@"departments.employees"]);
+
+    // [Employee] (managers)
+    NSLog(@"managers: %@", [self.hrController valueForKeyPath:@"departments.manager"]);
+
+    // Collection operators
+    // [Employee] (all)
+    NSLog(@"allEmployees: %@", [self.hrController valueForKeyPath:@"departments.@distinctUnionOfArrays.employees"]);
 }
 
 
