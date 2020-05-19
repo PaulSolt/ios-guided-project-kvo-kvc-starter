@@ -32,7 +32,6 @@
                                                 userInfo:nil
                                                  repeats:YES];
     self.running = YES;
-    
 }
 
 - (void)stop {
@@ -42,7 +41,8 @@
     self.running = NO;
 }
 
-
+// IN any other method, use dot syntax or message call for property to trigger a KVO notification
+// Otherwise it won't send a notification to a listener if you modify the property
 - (void)reset {
     [self stop];
     self.elapsedTime = 0;
@@ -59,6 +59,7 @@
 
 #pragma mark - Properties
 
+// Always use _instanceVariableName in setter/init/dealloc methods
 - (void)setTimer:(NSTimer *)timer {
     if (timer != _timer) {
         [_timer invalidate]; // Make sure the previous timer stops
