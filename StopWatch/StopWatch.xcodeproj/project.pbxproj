@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BD129F362474574C00F5AC98 /* LSIMyOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = BD129F352474574C00F5AC98 /* LSIMyOperation.m */; };
 		BDAD0472237B13F1005C1360 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAD0471237B13F1005C1360 /* AppDelegate.m */; };
 		BDAD0475237B13F1005C1360 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BDAD0474237B13F1005C1360 /* SceneDelegate.m */; };
 		BDAD047D237B13F2005C1360 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BDAD047C237B13F2005C1360 /* Assets.xcassets */; };
@@ -18,6 +19,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BD129F342474574C00F5AC98 /* LSIMyOperation.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LSIMyOperation.h; sourceTree = "<group>"; };
+		BD129F352474574C00F5AC98 /* LSIMyOperation.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LSIMyOperation.m; sourceTree = "<group>"; };
 		BDAD046D237B13F1005C1360 /* StopWatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = StopWatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BDAD0470237B13F1005C1360 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		BDAD0471237B13F1005C1360 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -71,6 +74,8 @@
 				BDAD0476237B13F1005C1360 /* ViewController.h */,
 				BDAD048E237B14AC005C1360 /* ViewController.m */,
 				BDAD0489237B1409005C1360 /* LSIStopWatch.h */,
+				BD129F342474574C00F5AC98 /* LSIMyOperation.h */,
+				BD129F352474574C00F5AC98 /* LSIMyOperation.m */,
 				BDAD048A237B1409005C1360 /* LSIStopWatch.m */,
 				BDAD048B237B1409005C1360 /* Main.storyboard */,
 				BDAD047C237B13F2005C1360 /* Assets.xcassets */,
@@ -151,6 +156,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BD129F362474574C00F5AC98 /* LSIMyOperation.m in Sources */,
 				BDAD0472237B13F1005C1360 /* AppDelegate.m in Sources */,
 				BDAD0483237B13F2005C1360 /* main.m in Sources */,
 				BDAD048C237B140A005C1360 /* LSIStopWatch.m in Sources */,
