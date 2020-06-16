@@ -27,7 +27,7 @@
     LSIDepartment *marketing = [[LSIDepartment alloc] init];
     marketing.name = @"Marketing";
     LSIEmployee * philSchiller = [[LSIEmployee alloc] init];
-    philSchiller.name = @"Phil";
+    philSchiller.firstName = @"Phil";
     philSchiller.jobTitle = @"VP of Marketing";
     philSchiller.salary = 10000000; 
     marketing.manager = philSchiller;
@@ -36,23 +36,23 @@
     LSIDepartment *engineering = [[LSIDepartment alloc] init];
     engineering.name = @"Engineering";
     LSIEmployee *craig = [[LSIEmployee alloc] init];
-    craig.name = @"Craig";
+    craig.firstName = @"Craig";
     craig.salary = 9000000;
     craig.jobTitle = @"Head of Software";
     engineering.manager = craig;
     
     LSIEmployee *e1 = [[LSIEmployee alloc] init];
-    e1.name = @"Chad";
+    e1.firstName = @"Chad";
     e1.jobTitle = @"Engineer";
     e1.salary = 200000;
     
     LSIEmployee *e2 = [[LSIEmployee alloc] init];
-    e2.name = @"Lance";
+    e2.firstName = @"Lance";
     e2.jobTitle = @"Engineer";
     e2.salary = 250000;
     
     LSIEmployee *e3 = [[LSIEmployee alloc] init];
-    e3.name = @"Joe";
+    e3.firstName = @"Joe";
     e3.jobTitle = @"Marketing Designer";
     e3.salary = 100000;
     
