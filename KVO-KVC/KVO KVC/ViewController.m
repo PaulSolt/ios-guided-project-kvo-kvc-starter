@@ -87,6 +87,31 @@
 
     NSString *secret = [craig valueForKey:@"_mySecret"];
     NSLog(@"secret: %@", secret);
+    
+    // KVO - Key Value Observing (Hook for logic or UI updates)
+
+    // Listen to any changes to a value
+
+    // KVO Compliant - NSOperation and NSOperationQueue
+
+    [craig addObserver:self forKeyPath:@"name" options:0 context:nil];
+
+    // Attempt to change name
+    NSLog(@"Changing Craig's name");
+    craig.firstName = @"Craig";
+    craig.lastName = @"Federighi";
+    
+    // Future: Remove observer (you can only do this once or it will crash!!!)
+}
+
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    NSLog(@"observeValueForKeyPath");
+    if ([keyPath isEqualToString:@"name"]) {
+        NSLog(@"%@ keypath has changed to value: %@", keyPath, [object valueForKey:keyPath]);
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
 }
 
 

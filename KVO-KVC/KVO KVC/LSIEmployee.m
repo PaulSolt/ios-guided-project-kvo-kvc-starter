@@ -22,9 +22,30 @@
 
 // Override getter to make name a computed property
 - (NSString *)name {
-    return self.firstName;
+//    return self.firstName + " " + self.lastName; // Swift
+    NSString *name = self.firstName;
+    // "Craig" " " + "" = "Craig "
+    if (self.lastName && self.lastName.length != 0) { // don't append " " -> "Craig "
+        name = [name stringByAppendingFormat:@" %@", self.lastName];
+    }
+    //return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
+    return name;
 }
 
+// Option 1: Override our setter on the firstName / lastName
+- (void)setFirstName:(NSString *)firstName {
+    // willChangeValue
+    [self willChangeValueForKey:@"name"];  // use a constant for key path to prevent bugs
+    
+    _firstName = firstName;
+    
+    // didChangeValue
+    [self didChangeValueForKey:@"name"];
+}
+
++ (NSSet *)keyPathsForValuesAffectingName {
+    return [NSSet setWithObjects:@"lastName", @"firstName", nil];
+}
 
 // TODO: NSNumberFormatter with currencyStyle
 - (NSString *)description {
