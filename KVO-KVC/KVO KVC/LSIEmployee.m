@@ -20,6 +20,12 @@
     NSString *_mySecret;
 }
 
+// Override getter to make name a computed property
+- (NSString *)name {
+    return self.firstName;
+}
+
+
 // TODO: NSNumberFormatter with currencyStyle
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@, Title: %@, Salary: %li", self.name, self.jobTitle, self.salary];

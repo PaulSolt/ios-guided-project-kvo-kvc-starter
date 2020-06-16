@@ -75,12 +75,11 @@
     // If things are not named correctly, following the naming convention, your app will crash at run-time
     // There are no compile time checks ... super dynamic feature
 
-    NSString *name = [craig valueForKey:@"name"]; // FIXME: Use a constant so you don't accidentally make typos all over your code
+    NSString *name = [craig valueForKey:@"firstName"]; // FIXME: Use a constant so you don't accidentally make typos all over your code
     NSLog(@"name: %@", name);
 
-
     // Property will automatically create a setter/getter that is KVC
-    [craig setValue:@"Hair Force One" forKey:@"name"]; // will call the setName method
+    [craig setValue:@"Hair Force One" forKey:@"firstName"]; // will call the setName method
     NSLog(@"name: %@", craig.name);
     
     // We can set a "private" property using KVC
