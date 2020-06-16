@@ -10,8 +10,8 @@
 #import "LSIStopWatch.h"
 
 
-// TODO: Create a KVOContext to identify the StopWatch observer
-
+// Create a KVOContext to identify the StopWatch observer
+static void *KVOContext = &KVOContext; // storing address 2342342343 -> 0x2343
 
 @interface ViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *timeLabel;
@@ -30,6 +30,9 @@
     
     self.stopwatch = [[LSIStopWatch alloc] init];
 	[self.timeLabel setFont:[UIFont monospacedDigitSystemFontOfSize: self.timeLabel.font.pointSize  weight:UIFontWeightMedium]];
+    
+    // Test remove works!
+//    self.stopwatch = nil;
 }
 
 - (IBAction)resetButtonPressed:(id)sender {
@@ -71,23 +74,37 @@
     if (stopwatch != _stopwatch) {
         
         // willSet
-		// TODO: Cleanup KVO - Remove Observers
+		// Cleanup KVO - Remove Observers
+        [self.stopwatch removeObserver:self forKeyPath:@"running" context:KVOContext];
+        [self.stopwatch removeObserver:self forKeyPath:@"elapsedTime" context:KVOContext];
+        
 
         _stopwatch = stopwatch;
         
         // didSet
-		// TODO: Setup KVO - Add Observers
+        [self.stopwatch addObserver:self forKeyPath:@"running" options:NSKeyValueObservingOptionInitial context:KVOContext];
+        [self.stopwatch addObserver:self forKeyPath:@"elapsedTime" options:NSKeyValueObservingOptionInitial context:KVOContext];
+
     }
     
 }
 
-
-// TODO: Review docs and implement observerValueForKeyPath
-
+// Review docs and implement observerValueForKeyPath
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
+    if (context == KVOContext) {
+        if ([keyPath isEqualToString:@"running"]) {
+            [self updateViews];
+        } else if ([keyPath isEqualToString:@"elapsedTime"]) {
+            [self updateViews];
+        }
+    } else {
+        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    }
+}
 
 - (void)dealloc {
-	// TODO: Stop observing KVO (otherwise it will crash randomly)
-    
+    _stopwatch = nil; // remove observer using property setter
 }
 
 @end
