@@ -67,7 +67,27 @@
     
     NSLog(@"%@", self.hrController);
     
+    // KVC - Key Value Coding
+
+    // 1. setter must be of form "setPropertyName"
+    // 2. getter must be of form "propertyName"
+
+    // If things are not named correctly, following the naming convention, your app will crash at run-time
+    // There are no compile time checks ... super dynamic feature
+
+    NSString *name = [craig valueForKey:@"name"]; // FIXME: Use a constant so you don't accidentally make typos all over your code
+    NSLog(@"name: %@", name);
+
+
+    // Property will automatically create a setter/getter that is KVC
+    [craig setValue:@"Hair Force One" forKey:@"name"]; // will call the setName method
+    NSLog(@"name: %@", craig.name);
     
+    // We can set a "private" property using KVC
+    [craig setValue:@"I love long walks on the beach" forKey:@"_mySecret"]; // _mySecret or mySecret
+
+    NSString *secret = [craig valueForKey:@"_mySecret"];
+    NSLog(@"secret: %@", secret);
 }
 
 

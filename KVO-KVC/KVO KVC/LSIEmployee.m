@@ -8,8 +8,19 @@
 
 #import "LSIEmployee.h"
 
-@implementation LSIEmployee
+@interface LSIEmployee () {
+    // private properties
+}
 
+@end
+
+
+@implementation LSIEmployee {
+    // private properties
+    NSString *_mySecret;
+}
+
+// TODO: NSNumberFormatter with currencyStyle
 - (NSString *)description {
     return [NSString stringWithFormat:@"%@, Title: %@, Salary: %li", self.name, self.jobTitle, self.salary];
 }
