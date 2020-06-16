@@ -20,6 +20,13 @@
 
 @implementation ViewController
 
+// deinit in Swift
+- (void)dealloc {
+    // We must remove our observer exactly once
+    
+    // Craig isn't an instance variable, we can't unobserve here ...
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -102,6 +109,8 @@
     craig.lastName = @"Federighi";
     
     // Future: Remove observer (you can only do this once or it will crash!!!)
+    
+    [craig removeObserver:self forKeyPath:@"name"]; // will crash if called multiple times, or wrong key path
 }
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
