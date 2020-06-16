@@ -28,21 +28,32 @@
     if (self.lastName && self.lastName.length != 0) { // don't append " " -> "Craig "
         name = [name stringByAppendingFormat:@" %@", self.lastName];
     }
-    //return [NSString stringWithFormat:@"%@ %@", self.firstName, self.lastName];
     return name;
 }
 
 // Option 1: Override our setter on the firstName / lastName
-- (void)setFirstName:(NSString *)firstName {
-    // willChangeValue
-    [self willChangeValueForKey:@"name"];  // use a constant for key path to prevent bugs
-    
-    _firstName = firstName;
-    
-    // didChangeValue
-    [self didChangeValueForKey:@"name"];
-}
+//- (void)setFirstName:(NSString *)firstName {
+//    // willChangeValue
+//    [self willChangeValueForKey:@"name"];  // FIXME: use a constant for key path to prevent bugs
+//
+//    _firstName = firstName;
+//
+//    // didChangeValue
+//    [self didChangeValueForKey:@"name"];
+//}
+//
+//- (void)setLastName:(NSString *)lastName {
+//    // willChangeValue
+//    [self willChangeValueForKey:@"name"];  // FIXME: use a constant for key path to prevent bugs
+//
+//    _lastName = lastName;
+//
+//    // didChangeValue
+//    [self didChangeValueForKey:@"name"];
+//}
 
+
+// Option 2: Add dependent keys
 + (NSSet *)keyPathsForValuesAffectingName {
     return [NSSet setWithObjects:@"lastName", @"firstName", nil];
 }
